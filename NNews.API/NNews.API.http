@@ -1,0 +1,151 @@
+@NNews.API_HostAddress = http://localhost:5115
+
+# Tags API
+
+### List all tags
+GET {{NNews.API_HostAddress}}/api/tag
+Accept: application/json
+
+###
+
+### Get tag by ID
+GET {{NNews.API_HostAddress}}/api/tag/1
+Accept: application/json
+
+###
+
+### Create new tag
+POST {{NNews.API_HostAddress}}/api/tag
+Content-Type: application/json
+
+{
+  "title": "Technology",
+  "slug": "technology"
+}
+
+###
+
+### Update existing tag
+PUT {{NNews.API_HostAddress}}/api/tag/1
+Content-Type: application/json
+
+{
+  "tag_id": 1,
+  "title": "Technology Updated",
+  "slug": "technology-updated"
+}
+
+###
+
+### Delete tag
+DELETE {{NNews.API_HostAddress}}/api/tag/1
+
+###
+
+# Categories API
+
+### List all categories
+GET {{NNews.API_HostAddress}}/api/category
+Accept: application/json
+
+###
+
+### Get category by ID
+GET {{NNews.API_HostAddress}}/api/category/1
+Accept: application/json
+
+###
+
+### Create new category
+POST {{NNews.API_HostAddress}}/api/category
+Content-Type: application/json
+
+{
+  "title": "Sports",
+  "path": "/sports"
+}
+
+###
+
+### Update existing category
+PUT {{NNews.API_HostAddress}}/api/category/1
+Content-Type: application/json
+
+{
+  "category_id": 1,
+  "title": "Sports Updated",
+  "path": "/sports-updated"
+}
+
+###
+
+### Delete category
+DELETE {{NNews.API_HostAddress}}/api/category/1
+
+###
+
+# Articles API
+
+### List articles by roles
+GET {{NNews.API_HostAddress}}/api/article/by-roles?roles=admin&roles=editor
+Accept: application/json
+
+###
+
+### Get article by ID
+GET {{NNews.API_HostAddress}}/api/article/1
+Accept: application/json
+
+###
+
+### Create new article
+POST {{NNews.API_HostAddress}}/api/article
+Content-Type: application/json
+
+{
+  "category_id": 1,
+  "author_id": 1,
+  "title": "Breaking News: Technology Advances",
+  "content": "This is the full content of the article...",
+  "status": 1,
+  "tags": [
+    {
+      "tag_id": 1
+    }
+  ],
+  "roles": [
+    {
+      "role_name": "public"
+    }
+  ]
+}
+
+###
+
+### Update existing article
+PUT {{NNews.API_HostAddress}}/api/article/1
+Content-Type: application/json
+
+{
+  "article_id": 1,
+  "category_id": 1,
+  "author_id": 1,
+  "title": "Breaking News: Technology Advances - Updated",
+  "content": "This is the updated content of the article...",
+  "status": 1,
+  "tags": [
+    {
+      "tag_id": 1
+    },
+    {
+      "tag_id": 2
+    }
+  ],
+  "roles": [
+    {
+      "role_name": "public"
+    }
+  ]
+}
+
+###

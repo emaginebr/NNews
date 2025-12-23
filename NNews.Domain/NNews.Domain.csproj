@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NNews.Dtos\NNews.Dtos.csproj" />
+    <ProjectReference Include="..\NNews.Infra.Interfaces\NNews.Infra.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="NTools.ACL">
+      <HintPath>..\Lib\NTools.ACL.dll</HintPath>
+    </Reference>
+    <Reference Include="NTools.DTO">
+      <HintPath>..\Lib\NTools.DTO.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
