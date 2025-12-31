@@ -41,6 +41,7 @@ export interface Article {
   authorId?: number;
   title: string;
   content: string;
+  imageName?: string;
   status: ArticleStatus;
   dateAt?: string | Date;
   createdAt?: string | Date;
@@ -76,6 +77,7 @@ export interface CategoryUpdate extends CategoryInput {
 export interface ArticleInput {
   title: string;
   content: string;
+  imageName?: string;
   status: ArticleStatus;
   categoryId?: number;
   dateAt?: string | Date;

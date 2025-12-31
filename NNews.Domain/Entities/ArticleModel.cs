@@ -14,6 +14,7 @@ namespace NNews.Domain.Entities
         public DateTime DateAt { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime UpdatedAt { get; private set; }
+        public string? ImageName { get; private set; }
         public string Title { get; private set; }
         public string Content { get; private set; }
         public ArticleStatus Status { get; private set; }
@@ -48,8 +49,18 @@ namespace NNews.Domain.Entities
             return new ArticleModel(title, content, categoryId, authorId, status);
         }
 
-        public static ArticleModel Reconstruct(long articleId, string title, string content,
-            long categoryId, long? authorId, ArticleStatus status, DateTime dateAt, DateTime createdAt, DateTime updatedAt)
+        public static ArticleModel Reconstruct(
+            long articleId, 
+            string title, 
+            string content,
+            long categoryId, 
+            long? authorId, 
+            ArticleStatus status, 
+            DateTime dateAt, 
+            DateTime createdAt, 
+            DateTime updatedAt, 
+            string? imageName = null
+        )
         {
             var article = new ArticleModel
             {
@@ -61,7 +72,8 @@ namespace NNews.Domain.Entities
                 Status = status,
                 DateAt = dateAt,
                 CreatedAt = createdAt,
-                UpdatedAt = updatedAt
+                UpdatedAt = updatedAt,
+                ImageName = imageName
             };
 
             return article;
@@ -94,6 +106,12 @@ namespace NNews.Domain.Entities
         public void ChangeCategory(long categoryId)
         {
             SetCategoryId(categoryId);
+            UpdateTimestamp();
+        }
+
+        public void UpdateImageName(string? imageName)
+        {
+            ImageName = imageName;
             UpdateTimestamp();
         }
 

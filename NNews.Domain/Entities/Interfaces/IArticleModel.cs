@@ -10,6 +10,7 @@ namespace NNews.Domain.Entities.Interfaces
         DateTime DateAt { get; }
         DateTime CreatedAt { get; }
         DateTime UpdatedAt { get; }
+        string? ImageName { get; }
         string Title { get; }
         string Content { get; }
         ArticleStatus Status { get; }
@@ -21,6 +22,7 @@ namespace NNews.Domain.Entities.Interfaces
         void UpdateContent(string content);
         void Update(string title, string content);
         void ChangeCategory(long categoryId);
+        void UpdateImageName(string? imageName);
         void Publish();
         void Draft();
         void Archive();

@@ -43,6 +43,9 @@ public partial class NNewsContext : DbContext
             entity.Property(e => e.DateAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("date_at");
+            entity.Property(e => e.ImageName)
+                .HasMaxLength(560)
+                .HasColumnName("image_name");
             entity.Property(e => e.Status)
                 .HasDefaultValue(0)
                 .HasColumnName("status");

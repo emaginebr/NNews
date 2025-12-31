@@ -18,6 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="NAuth.ACL">
+      <HintPath>..\Lib\NAuth.ACL.dll</HintPath>
+    </Reference>
+    <Reference Include="NAuth.DTO">
+      <HintPath>..\Lib\NAuth.DTO.dll</HintPath>
+    </Reference>
     <Reference Include="NTools.ACL">
       <HintPath>..\Lib\NTools.ACL.dll</HintPath>
     </Reference>

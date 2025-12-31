@@ -38,7 +38,8 @@ namespace NNews.Infra.Mapping.Profiles
                             (ArticleStatus)src.Status,
                             src.DateAt,
                             src.CreatedAt,
-                            src.UpdatedAt
+                            src.UpdatedAt,
+                            src.ImageName
                         );
                     }
                     else
@@ -50,6 +51,11 @@ namespace NNews.Infra.Mapping.Profiles
                             src.AuthorId,
                             (ArticleStatus)src.Status
                         );
+                        
+                        if (!string.IsNullOrEmpty(src.ImageName))
+                        {
+                            article.UpdateImageName(src.ImageName);
+                        }
                     }
 
                     if (src.Tags != null && src.Tags.Any())

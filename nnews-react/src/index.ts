@@ -8,6 +8,7 @@ export { ArticleList } from './components/ArticleList';
 export { ArticleViewer } from './components/ArticleViewer';
 export { ArticleEditor } from './components/ArticleEditor';
 export { MarkdownEditor } from './components/MarkdownEditor';
+export { RichTextEditor } from './components/RichTextEditor';
 
 // News Components - Categories
 export { CategoryList } from './components/CategoryList';

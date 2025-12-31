@@ -5,10 +5,34 @@ const NEWS_API_ENDPOINTS = {
   ARTICLES: '/api/article',
   ARTICLES_FILTER: '/api/article/filter',
   ARTICLE_BY_ID: (id: number) => `/api/article/${id}`,
+  IMAGE_UPLOAD: '/api/Image/uploadImage',
 };
 
 export class ArticleAPI {
   constructor(private client: AxiosInstance) {}
+
+  /**
+   * Upload an image file
+   */
+  async uploadImage(file: File): Promise<string> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    console.log('[ArticleAPI] uploadImage - Request:', { fileName: file.name, fileSize: file.size });
+    
+    const response = await this.client.post<string>(
+      NEWS_API_ENDPOINTS.IMAGE_UPLOAD,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+    );
+    
+    console.log('[ArticleAPI] uploadImage - Response:', response.data);
+    return response.data;
+  }
 
   /**
    * List articles with optional filtering by category

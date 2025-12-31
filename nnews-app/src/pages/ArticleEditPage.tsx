@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useArticles, useCategories, useTags, ArticleEditor, type ArticleInput, type ArticleUpdate } from 'nnews-react';
 import { ArrowLeft } from 'lucide-react';
 import { toast } from 'sonner';
+import 'react-quill-new/dist/quill.snow.css';
 
 export function ArticleEditPage() {
   const navigate = useNavigate();

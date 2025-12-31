@@ -17,6 +17,8 @@ public partial class Article
 
     public DateTime UpdatedAt { get; set; }
 
+    public string? ImageName { get; set; }
+
     public string Title { get; set; } = null!;
 
     public string Content { get; set; } = null!;

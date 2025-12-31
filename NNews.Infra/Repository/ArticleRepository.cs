@@ -169,6 +169,7 @@ namespace NNews.Infra.Repository
             existingArticle.Content = articleModel.Content;
             existingArticle.CategoryId = articleModel.CategoryId;
             existingArticle.Status = (int)articleModel.Status;
+            existingArticle.ImageName = articleModel.ImageName;
             existingArticle.DateAt = DateTime.SpecifyKind(articleModel.DateAt, DateTimeKind.Unspecified);
             existingArticle.UpdatedAt = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Unspecified);
 

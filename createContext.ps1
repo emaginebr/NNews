@@ -1,26 +1,7 @@
-# Load environment variables from .env file
-$envFile = ".env"
+# Connection string for NNews database
+$connectionString = "Host=localhost;Port=5433;Database=nnews_db;Username=nnews_user;Password=pikpro6"
 
-if (-Not (Test-Path $envFile)) {
-    Write-Host "Error: .env file not found!" -ForegroundColor Red
-    Write-Host "Please create a .env file based on .env.example" -ForegroundColor Yellow
-    exit 1
-}
-
-# Read .env file and parse CONNECTION_STRING
-$connectionString = $null
-Get-Content $envFile | ForEach-Object {
-    if ($_ -match '^CONNECTION_STRING=(.+)$') {
-        $connectionString = $matches[1].Trim()
-    }
-}
-
-if ([string]::IsNullOrEmpty($connectionString)) {
-    Write-Host "Error: CONNECTION_STRING not found in .env file!" -ForegroundColor Red
-    exit 1
-}
-
-Write-Host "Using connection string from .env file" -ForegroundColor Green
+Write-Host "Using connection string" -ForegroundColor Green
 Write-Host "Connection: $connectionString" -ForegroundColor Cyan
 
 # Navigate to NNews.Infra directory

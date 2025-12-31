@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NAuth.ACL;
+using NAuth.ACL.Interfaces;
 using NNews.Domain.Entities.Interfaces;
 using NNews.Domain.Services;
 using NNews.Domain.Services.Interfaces;
@@ -53,6 +55,8 @@ namespace NNews.Application
             services.Configure<NToolSetting>(configuration.GetSection("NTools"));
 
             injectDependency(typeof(IStringClient), typeof(StringClient), services, scoped);
+            injectDependency(typeof(IFileClient), typeof(FileClient), services, scoped);
+            injectDependency(typeof(IUserClient), typeof(UserClient), services, scoped);
 
             #region Infra
             injectDependency(typeof(NNewsContext), typeof(NNewsContext), services, scoped);

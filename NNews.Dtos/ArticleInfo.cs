@@ -16,6 +16,10 @@ namespace NNews.Dtos
         [JsonPropertyName("authorId")]
         public long? AuthorId { get; set; }
 
+        [StringLength(560, ErrorMessage = "Image name cannot exceed 560 characters")]
+        [JsonPropertyName("imageName")]
+        public string? ImageName { get; set; }
+
         [Required(ErrorMessage = "Title is required")]
         [StringLength(255, ErrorMessage = "Title cannot exceed 255 characters")]
         [JsonPropertyName("title")]
