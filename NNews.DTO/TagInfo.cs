@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace NNews.Dtos
+namespace NNews.DTO
 {
     public class TagInfo
     {

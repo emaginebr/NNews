@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NNews.Dtos;
+using NNews.DTO;
 
 namespace NNews.ACL.Interfaces
 {

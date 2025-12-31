@@ -1,6 +1,6 @@
 using AutoMapper;
 using NNews.Domain.Entities;
-using NNews.Dtos;
+using NNews.DTO;
 
 namespace NNews.Infra.Mapping.Profiles
 {

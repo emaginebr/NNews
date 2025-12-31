@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NNews.Dtos\NNews.Dtos.csproj" />
+    <ProjectReference Include="..\NNews.DTO\NNews.DTO.csproj" />
   </ItemGroup>
 
 </Project>

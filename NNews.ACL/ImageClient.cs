@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using NNews.ACL.Interfaces;
-using NNews.Dtos.Settings;
+using NNews.DTO.Settings;
 using System.Net.Http.Json;
 
 namespace NNews.ACL

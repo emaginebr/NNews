@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NNews.Dtos.Settings
+namespace NNews.DTO.Settings
 {
     public class NNewsSetting
     {

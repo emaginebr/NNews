@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NNews.Domain.Services.Interfaces;
-using NNews.Dtos;
+using NNews.DTO;
 
 namespace NNews.API.Controllers
 {

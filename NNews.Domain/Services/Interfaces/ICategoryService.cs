@@ -1,4 +1,4 @@
-﻿using NNews.Dtos;
+﻿using NNews.DTO;
 
 namespace NNews.Domain.Services.Interfaces
 {

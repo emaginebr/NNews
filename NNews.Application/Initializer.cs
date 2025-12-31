@@ -6,7 +6,7 @@ using NAuth.ACL.Interfaces;
 using NNews.Domain.Entities.Interfaces;
 using NNews.Domain.Services;
 using NNews.Domain.Services.Interfaces;
-using NNews.Dtos.Settings;
+using NNews.DTO.Settings;
 using NNews.Infra.Context;
 using NNews.Infra.Interfaces.Repository;
 using NNews.Infra.Mapping.Profiles;

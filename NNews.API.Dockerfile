@@ -6,7 +6,7 @@ WORKDIR /src
 COPY ["NNews.API/NNews.API.csproj", "NNews.API/"]
 COPY ["NNews.Application/NNews.Application.csproj", "NNews.Application/"]
 COPY ["NNews.Domain/NNews.Domain.csproj", "NNews.Domain/"]
-COPY ["NNews.Dtos/NNews.Dtos.csproj", "NNews.Dtos/"]
+COPY ["NNews.DTO/NNews.DTO.csproj", "NNews.DTO/"]
 COPY ["NNews.Infra/NNews.Infra.csproj", "NNews.Infra/"]
 COPY ["NNews.Infra.Interfaces/NNews.Infra.Interfaces.csproj", "NNews.Infra.Interfaces/"]
 COPY ["Lib/", "Lib/"]

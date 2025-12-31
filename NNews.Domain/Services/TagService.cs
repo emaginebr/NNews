@@ -2,7 +2,7 @@
 using NNews.Domain.Entities;
 using NNews.Domain.Entities.Interfaces;
 using NNews.Domain.Services.Interfaces;
-using NNews.Dtos;
+using NNews.DTO;
 using NNews.Infra.Interfaces.Repository;
 using NTools.ACL.Interfaces;
 

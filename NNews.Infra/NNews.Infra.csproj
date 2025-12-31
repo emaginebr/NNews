@@ -29,7 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NNews.Domain\NNews.Domain.csproj" />
-    <ProjectReference Include="..\NNews.Dtos\NNews.Dtos.csproj" />
+    <ProjectReference Include="..\NNews.DTO\NNews.DTO.csproj" />
     <ProjectReference Include="..\NNews.Infra.Interfaces\NNews.Infra.Interfaces.csproj" />
   </ItemGroup>
 

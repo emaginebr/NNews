@@ -2,7 +2,7 @@ using AutoMapper;
 using NNews.Domain.Entities;
 using NNews.Domain.Entities.Interfaces;
 using NNews.Domain.Enums;
-using NNews.Dtos;
+using NNews.DTO;
 
 namespace NNews.Infra.Mapping.Profiles
 {
