@@ -18,7 +18,6 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageIcon>icon.png</PackageIcon>
     <Copyright>Copyright (c) 2026 NNews Team</Copyright>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
