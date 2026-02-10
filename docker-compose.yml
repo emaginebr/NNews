@@ -50,31 +50,6 @@ services:
     networks:
       - emagine-network
 
-  nnews-app:
-    build:
-      context: .
-      dockerfile: nnews-app.Dockerfile
-      args:
-        - VITE_API_URL=${VITE_API_URL:-http://localhost:5004}
-        - VITE_NNEWS_API_URL=${VITE_NNEWS_API_URL:-https://localhost:5008}
-        - NODE_ENV=${NODE_ENV:-development}
-    container_name: nnews-app
-    restart: unless-stopped
-    depends_on:
-      - nnews-api
-    environment:
-      - NODE_ENV=${NODE_ENV:-development}
-    ports:
-      - "${NNEWS_APP_PORT:-5009}:80"
-    networks:
-      - emagine-network
-    healthcheck:
-      test: ["CMD-SHELL", "wget --quiet --tries=1 --spider http://localhost/health || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-
 volumes:
   postgres_data:
     driver: local
