@@ -7,7 +7,7 @@ using NNews.DTO.AI;
 
 namespace NNews.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ArticleController : ControllerBase
     {
