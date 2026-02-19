@@ -13,8 +13,8 @@
     <Product>NNews Content Management System</Product>
     <Description>DTOs and HTTP client library (ACL) for NNews CMS. Includes models for articles, categories, tags, AI-powered content generation with ChatGPT and DALL-E 3, and strongly-typed HTTP clients for consuming the NNews API.</Description>
     <PackageTags>nnews;cms;dto;acl;client;api;articles;ai;chatgpt;dalle;content-management;http-client</PackageTags>
-    <PackageProjectUrl>https://github.com/landim32/NNews.API</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/landim32/NNews.API</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/emaginebr/NNews</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/emaginebr/NNews</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>

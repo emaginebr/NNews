@@ -8,7 +8,7 @@ This documentation covers two NuGet packages from the NNews CMS system:
 
 Target Framework: .NET 8.0
 License: MIT
-Repository: https://github.com/landim32/NNews.API
+Repository: https://github.com/emaginebr/NNews
 Version: 2.0.0
 
 ===============================================================================
@@ -807,8 +807,8 @@ Breaking Changes from v1.x:
 SUPPORT AND RESOURCES:
 -------------------------------------------------------------------------------
 
-GitHub: https://github.com/landim32/NNews.API
-Issues: https://github.com/landim32/NNews.API/issues
+GitHub: https://github.com/emaginebr/NNews
+Issues: https://github.com/emaginebr/NNews/issues
 License: MIT
 NuGet: https://www.nuget.org/packages/NNews.ACL
        https://www.nuget.org/packages/NNews.DTO

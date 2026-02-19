@@ -2,7 +2,7 @@
 
 [![NuGet](https://img.shields.io/nuget/v/NNews.svg)](https://www.nuget.org/packages/NNews/)
 [![Downloads](https://img.shields.io/nuget/dt/NNews.svg)](https://www.nuget.org/packages/NNews/)
-[![License](https://img.shields.io/github/license/landim32/NNews.API.svg)](https://github.com/landim32/NNews.API/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/emaginebr/NNews.svg)](https://github.com/emaginebr/NNews/blob/main/LICENSE)
 
 Unified package for the NNews content management system. Contains Data Transfer Objects (DTOs) and Anti-Corruption Layer (ACL) HTTP clients for consuming the NNews API, including support for articles, categories, tags, images, and AI-powered content generation.
 
@@ -264,7 +264,7 @@ public interface IImageClient
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/landim32/NNews.API/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/emaginebr/NNews/blob/main/LICENSE) file for details.
 
 ---
 

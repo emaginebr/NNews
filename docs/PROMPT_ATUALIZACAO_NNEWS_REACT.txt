@@ -920,7 +920,7 @@ test('should update article with AI', async () => {
 Para d�vidas ou problemas na integra��o, consulte:
 - Documenta��o da API: `/swagger`
 - Logs do backend: Todos os m�todos t�m logging detalhado
-- Repository: https://github.com/landim32/NNews.API
+- Repository: https://github.com/emaginebr/NNews
 
 ---
 
