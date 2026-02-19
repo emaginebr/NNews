@@ -8,7 +8,16 @@
       "Bash(dir:*)",
       "Bash(unzip:*)",
       "Bash(dotnet ef:*)",
-      "Bash(dotnet add:*)"
+      "Bash(dotnet add:*)",
+      "WebFetch(domain:www.nuget.org)",
+      "WebFetch(domain:github.com)",
+      "Bash(gh api:*)",
+      "Bash(python -c:*)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet package search:*)"
     ]
   }
 }

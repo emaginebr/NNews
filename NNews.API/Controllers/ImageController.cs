@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NAuth.ACL.Interfaces;
 using NNews.Domain.Services.Interfaces;
-using NTools.ACL.Interfaces;
+using zTools.ACL.Interfaces;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 

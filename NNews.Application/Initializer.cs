@@ -13,9 +13,9 @@ using NNews.Infra.Context;
 using NNews.Infra.Interfaces.Repository;
 using NNews.Infra.Mapping.Profiles;
 using NNews.Infra.Repository;
-using NTools.ACL;
-using NTools.ACL.Interfaces;
-using NTools.DTO.Settings;
+using zTools.ACL;
+using zTools.ACL.Interfaces;
+using zTools.DTO.Settings;
 
 namespace NNews.Application
 {
@@ -56,7 +56,7 @@ namespace NNews.Application
             services.AddHttpClient();
 
             services.Configure<NAuthSetting>(configuration.GetSection("NAuth"));
-            services.Configure<NToolSetting>(configuration.GetSection("NTools"));
+            services.Configure<zToolsetting>(configuration.GetSection("zTools"));
             services.Configure<NNewsSetting>(configuration.GetSection("NNews"));
 
             injectDependency(typeof(IStringClient), typeof(StringClient), services, scoped);

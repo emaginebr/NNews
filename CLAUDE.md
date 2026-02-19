@@ -71,7 +71,7 @@ NNews.ACL              → Anti-Corruption Layer HTTP clients for consuming the 
 - **Repository Pattern**: Generic interfaces in `NNews.Infra.Interfaces`, implementations in `NNews.Infra`
 - **AutoMapper Profiles**: Entity-to-DTO mapping in `NNews.Infra` (ArticleProfile, TagProfile, CategoryProfile)
 - **DI Setup**: All service/repository registration happens in `NNews.Application/Initializer.cs`
-- **Authentication**: NAuth.ACL with BasicAuthentication scheme and JWT; configured in `Program.cs`
+- **Authentication**: NAuth with BasicAuthentication scheme and JWT; configured in `Program.cs`
 - **CORS**: "AllowFrontend" policy (permissive — allows any origin)
 
 ### Domain Entities
@@ -81,8 +81,8 @@ NNews.ACL              → Anti-Corruption Layer HTTP clients for consuming the 
 - **ArticleRole** (role-based access control per article)
 
 ### External Dependencies
-- **NAuth.ACL** (v0.2.3) — Authentication & user management
-- **NTools.ACL** (v0.2.2) — ChatGPT integration, file management, string utilities
+- **NAuth** (v0.4.1) — Authentication & user management
+- **zTools** (v0.3.1) — ChatGPT integration, file management, string utilities
 - **PostgreSQL 16** — Primary database via Npgsql + EF Core
 
 ## Configuration
@@ -90,7 +90,7 @@ NNews.ACL              → Anti-Corruption Layer HTTP clients for consuming the 
 Environment-specific settings are in `appsettings.{Environment}.json`. Key sections:
 - `ConnectionStrings:DefaultConnection` — PostgreSQL connection
 - `NAuth` — Auth service URL and JWT secret
-- `NTools` — Tools service URL (ChatGPT, file ops)
+- `zTools` — Tools service URL (ChatGPT, file ops)
 - `Serilog` — Structured logging config
 
 Docker environment variables are defined in `.env` at the repo root.

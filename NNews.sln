@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Extra", "4 - Extra", "{
 		LICENSE = LICENSE
 		nnews.sql = nnews.sql
 		README.md = README.md
-		update-ntools.ps1 = update-ntools.ps1
+		update-ztools.ps1 = update-ztools.ps1
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NNews.Infra", "NNews.Infra\NNews.Infra.csproj", "{0AFE477B-5098-469B-BA45-C3B5D5E15EBB}"

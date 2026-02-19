@@ -4,7 +4,7 @@ using NNews.Domain.Entities.Interfaces;
 using NNews.Domain.Services.Interfaces;
 using NNews.DTO;
 using NNews.Infra.Interfaces.Repository;
-using NTools.ACL.Interfaces;
+using zTools.ACL.Interfaces;
 
 namespace NNews.Domain.Services
 {

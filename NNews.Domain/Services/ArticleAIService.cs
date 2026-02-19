@@ -7,8 +7,8 @@ using NNews.Domain.Services.Interfaces;
 using NNews.DTO;
 using NNews.DTO.AI;
 using NNews.Infra.Interfaces.Repository;
-using NTools.ACL.Interfaces;
-using NTools.DTO.ChatGPT;
+using zTools.ACL.Interfaces;
+using zTools.DTO.ChatGPT;
 using System.Text.Json;
 
 namespace NNews.Domain.Services

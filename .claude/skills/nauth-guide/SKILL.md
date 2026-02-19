@@ -1,12 +1,12 @@
 ---
 name: nauth-guide
-description: Guides how to integrate NAuth.ACL and NAuth.DTO packages for user authentication in a .NET 8 project. Use when the user wants to add authentication, configure NAuth, use IUserClient, or understand the NAuth authentication flow.
+description: Guides how to integrate the NAuth package for user authentication in a .NET 8 project. Use when the user wants to add authentication, configure NAuth, use IUserClient, or understand the NAuth authentication flow.
 allowed-tools: Read, Grep, Glob, Bash, Write, Edit, Task
 ---
 
 # NAuth Authentication Integration Guide
 
-You are an expert assistant that helps developers integrate the **NAuth.ACL** and **NAuth.DTO** NuGet packages for user authentication in .NET 8 Web API projects.
+You are an expert assistant that helps developers integrate the **NAuth** NuGet package for user authentication in .NET 8 Web API projects.
 
 ## Input
 
@@ -18,9 +18,9 @@ When the user asks about NAuth authentication, use this knowledge base to provid
 
 ---
 
-## NAuth.DTO — Data Transfer Objects
+## NAuth — Data Transfer Objects
 
-**Install:** `dotnet add package NAuth.DTO --version 0.2.3`
+**Install:** `dotnet add package NAuth --version 0.4.1`
 
 ### NAuthSetting
 
@@ -77,9 +77,9 @@ public enum UserStatus { Active = 1, Inactive = 2, Suspended = 3, Blocked = 4 }
 
 ---
 
-## NAuth.ACL — Anti-Corruption Layer
+## NAuth — Anti-Corruption Layer
 
-**Install:** `dotnet add package NAuth.ACL --version 0.2.3`
+**Install:** `dotnet add package NAuth --version 0.4.1`
 
 ### IUserClient Interface
 
@@ -290,7 +290,7 @@ public IActionResult Delete(int id)
 | 401 with valid token | JWT secret mismatch | Ensure `JwtSecret` matches NAuth API config |
 | `GetUserInSession` returns null | Missing `[Authorize]` or invalid token | Add `[Authorize]` or check token |
 | DI error for `IUserClient` | Missing registration | Add `services.AddScoped<IUserClient, UserClient>()` |
-| `NAuthHandler` not found | Missing package | Run `dotnet add package NAuth.ACL` |
+| `NAuthHandler` not found | Missing package | Run `dotnet add package NAuth` |
 
 ---
 
