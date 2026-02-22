@@ -9,7 +9,7 @@ namespace NNews.ACL
     public class ArticleClient : IArticleClient
     {
         private readonly HttpClient _httpClient;
-        private const string BaseRoute = "api/Article";
+        private const string BaseRoute = "Article";
 
         public ArticleClient(HttpClient httpClient, IOptions<NNewsSetting> settings)
         {

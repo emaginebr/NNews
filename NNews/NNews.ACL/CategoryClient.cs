@@ -9,7 +9,7 @@ namespace NNews.ACL
     public class CategoryClient : ICategoryClient
     {
         private readonly HttpClient _httpClient;
-        private const string BaseRoute = "api/Category";
+        private const string BaseRoute = "Category";
 
         public CategoryClient(HttpClient httpClient, IOptions<NNewsSetting> settings)
         {

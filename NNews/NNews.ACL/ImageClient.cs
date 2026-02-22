@@ -9,7 +9,7 @@ namespace NNews.ACL
     public class ImageClient : IImageClient
     {
         private readonly HttpClient _httpClient;
-        private const string BaseRoute = "api/Image";
+        private const string BaseRoute = "Image";
 
         public ImageClient(HttpClient httpClient, IOptions<NNewsSetting> settings)
         {

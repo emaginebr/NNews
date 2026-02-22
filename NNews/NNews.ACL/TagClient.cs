@@ -9,7 +9,7 @@ namespace NNews.ACL
     public class TagClient : ITagClient
     {
         private readonly HttpClient _httpClient;
-        private const string BaseRoute = "api/Tag";
+        private const string BaseRoute = "Tag";
 
         public TagClient(HttpClient httpClient, IOptions<NNewsSetting> settings)
         {
