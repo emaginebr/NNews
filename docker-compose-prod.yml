@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_URLS: "http://+:80;https://+:443"
+      ASPNETCORE_URLS: "http://+:80"
       Tenant__DefaultTenantId: emagine
       # Maps to appsettings: Tenants.emagine
       Tenants__emagine__ConnectionString: ${EMAGINE_CONNECTION_STRING}
@@ -15,12 +15,9 @@ services:
       # Maps to appsettings: Tenants.devblog
       Tenants__devblog__ConnectionString: ${DEVBLOG_CONNECTION_STRING}
       Tenants__devblog__JwtSecret: ${DEVBLOG_JWT_SECRET}
-      # HTTPS certificate
-      ASPNETCORE_Kestrel__Certificates__Default__Password: ${CERTIFICATE_PASSWORD}
-      ASPNETCORE_Kestrel__Certificates__Default__Path: /app/emagine.pfx
-    ports:
-      - "5007:80"
-      - "5008:443"
+    expose:
+      - "80"
+      - "443"
     networks:
       - emagine-network
     healthcheck:
