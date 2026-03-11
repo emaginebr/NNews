@@ -119,6 +119,7 @@ certs/
 *.crt
 *.key
 *.pfx
+!NNews.API/emagine.pfx
 *.p12
 *.pem
 
