@@ -36,17 +36,18 @@ RUN mkdir -p /app/logs /app/certs && \
     chmod 755 /app/certs
 
 # Expose ports
-EXPOSE 8080
-EXPOSE 8443
+EXPOSE 80
+EXPOSE 443
 
 # Copy published application
 COPY --from=publish /app/publish .
 
-# Set environment variables
-ENV ASPNETCORE_URLS=http://+:8080;https://+:8443
+# Copy SSL certificate (used in Production via Kestrel env vars)
+COPY ["NNews.API/emagine.pfx", "./emagine.pfx"]
+
+# Set environment variables (defaults to HTTP-only for dev; Production overrides via docker-compose-prod.yml)
+ENV ASPNETCORE_URLS=http://+:80
 ENV ASPNETCORE_ENVIRONMENT=Docker
-ENV CERTIFICATE_PATH="/app/certs/certificate.pfx"
-ENV CERTIFICATE_PASSWORD="pikpro6"
 
 # Run the application
 ENTRYPOINT ["dotnet", "NNews.API.dll"]

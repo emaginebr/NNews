@@ -1,0 +1,53 @@
+%% Diagram: NNews CMS - Multi-Tenant System Architecture
+%% Type: Flowchart
+%% Generated: 2026-03-11
+
+flowchart TD
+    subgraph Clients["External Clients"]
+        spa["Frontend SPA\n(nnews-app)"]
+        acl_consumers["ACL Consumers\n(NNews.ACL NuGet)"]
+    end
+
+    subgraph NNewsAPI["NNews API (.NET 8)"]
+        middleware["TenantMiddleware\n(X-Tenant-Id header)"]
+        auth["JWT Authentication\n(per-tenant JwtSecret)"]
+        controllers["API Controllers\n(Articles, Categories, Tags)"]
+        tenant_ctx["TenantContext\n(Scoped - resolves TenantId)"]
+        db_factory["TenantDbContextFactory\n(Dynamic ConnectionString)"]
+    end
+
+    subgraph ExternalServices["External Microservices"]
+        nauth["NAuth API\n(Authentication & Users)"]
+        ztools["zTools API\n(ChatGPT / DALL-E / S3)"]
+    end
+
+    subgraph Databases["PostgreSQL 16 (per tenant)"]
+        db_emagine[("emagine DB")]
+        db_devblog[("devblog DB")]
+        db_n[("... tenant-N DB")]
+    end
+
+    spa -->|"X-Tenant-Id header\n+ JWT Bearer"| middleware
+    acl_consumers -->|"TenantHeaderHandler\nauto-injects X-Tenant-Id"| middleware
+
+    middleware --> auth
+    auth -->|"Validates JWT with\ntenant-specific secret"| controllers
+    controllers --> tenant_ctx
+    tenant_ctx --> db_factory
+
+    db_factory -->|"tenant = emagine"| db_emagine
+    db_factory -->|"tenant = devblog"| db_devblog
+    db_factory -->|"tenant = N"| db_n
+
+    controllers -->|"User auth & roles"| nauth
+    controllers -->|"AI content generation\nImage upload"| ztools
+
+    classDef client fill:#4A90D9,stroke:#2C5F8A,color:#fff
+    classDef api fill:#50C878,stroke:#2E8B57,color:#fff
+    classDef service fill:#FFB347,stroke:#CC8800,color:#333
+    classDef db fill:#DDA0DD,stroke:#8B008B,color:#333
+
+    class spa,acl_consumers client
+    class middleware,auth,controllers,tenant_ctx,db_factory api
+    class nauth,ztools service
+    class db_emagine,db_devblog,db_n db

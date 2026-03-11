@@ -78,6 +78,11 @@ ALTER TABLE ONLY article_tags ADD CONSTRAINT fk_article_tag_article FOREIGN KEY 
 ALTER TABLE ONLY article_tags ADD CONSTRAINT fk_article_tag_tag FOREIGN KEY (tag_id) REFERENCES tags(tag_id);
 ALTER TABLE ONLY article_roles ADD CONSTRAINT fk_article_role_article FOREIGN KEY (article_id) REFERENCES articles(article_id) ON DELETE CASCADE;
 
+-- INDEXES
+CREATE INDEX "IX_article_tags_tag_id" ON article_tags (tag_id);
+CREATE INDEX "IX_articles_category_id" ON articles (category_id);
+CREATE INDEX "IX_categories_parent_id" ON categories (parent_id);
+
 -- INITIALIZE SEQUENCES
 SELECT pg_catalog.setval('article_id_seq', 1, true);
 SELECT pg_catalog.setval('category_id_seq', 1, true);

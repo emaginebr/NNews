@@ -32,26 +32,22 @@ services:
       postgres:
         condition: service_healthy
     environment:
-      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Docker}
-      - ASPNETCORE_URLS=http://+:8080;https://+:8443
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=${CERTIFICATE_PATH}
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=${CERTIFICATE_PASSWORD}
-      - ASPNETCORE_HTTPS_PORT=8443
-      - ConnectionStrings__NNewsContext=${CONNECTION_STRING}
-      - NAuth__JwtSecret=${JWT_SECRET}
+      ASPNETCORE_ENVIRONMENT: Docker
+      ASPNETCORE_URLS: "http://+:80"
+      zTools__ApiURL: ${ZTOOL_API_URL}
     ports:
-      - "${API_HTTP_PORT:-5007}:8080"
-      - "${API_HTTPS_PORT:-5008}:8443"
-    volumes:
-      - nnews_logs:/app/logs
-      - ./certs:/app/certs:ro
+      - "${API_HTTP_PORT:-5007}:80"
     networks:
       - emagine-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:80/ || exit 1"]
+      interval: 30s
+      timeout: 3s
+      start_period: 10s
+      retries: 3
 
 volumes:
   postgres_data:
-    driver: local
-  nnews_logs:
     driver: local
 
 networks:

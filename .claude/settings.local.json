@@ -17,7 +17,14 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(dotnet restore:*)",
       "Bash(dotnet build:*)",
-      "Bash(dotnet package search:*)"
+      "Bash(dotnet package search:*)",
+      "Bash(find /c/repos/NNews/NNews/NNews.API -type f | grep -E \"\\\\.\\(cs|json\\)$\" | sort)",
+      "Bash(for dir:*)",
+      "Bash(do echo:*)",
+      "Read(//c/repos/NNews/NNews/**)",
+      "Bash(done)",
+      "Bash(mkdir -p /c/repos/NNews/NNews/NNews/NNews.ACL/Handlers && mkdir -p /c/repos/NNews/NNews/NNews/NNews.ACL/Services && mkdir -p /c/repos/NNews/NNews/NNews.Application/Interfaces && mkdir -p /c/repos/NNews/NNews/NNews.Application/Services && mkdir -p /c/repos/NNews/NNews/NNews.API/Middlewares)",
+      "Bash(dotnet tool:*)"
     ]
   }
 }

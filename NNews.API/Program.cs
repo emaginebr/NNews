@@ -1,11 +1,12 @@
+using NNews.API.Middlewares;
 using NNews.Application;
 using Serilog;
 using Serilog.Events;
 using System.Text.Json.Serialization;
 
-// Configuração do Serilog ANTES de criar o builder
+// Configuraï¿½ï¿½o do Serilog ANTES de criar o builder
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Verbose()  // Nível mais baixo do Serilog (equivalente a Trace)
+    .MinimumLevel.Verbose()  // Nï¿½vel mais baixo do Serilog (equivalente a Trace)
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
     .MinimumLevel.Override("System", LogEventLevel.Warning)
@@ -38,7 +39,7 @@ try
         .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true)
         .AddEnvironmentVariables();
 
-    // Configuração de CORS
+    // Configuraï¿½ï¿½o de CORS
     builder.Services.AddCors(options =>
     {
         options.AddPolicy("AllowFrontend", policy =>
@@ -58,36 +59,20 @@ try
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-
-    // Configure Kestrel for HTTPS if certificate is available
-    var certPath = builder.Configuration["ASPNETCORE_Kestrel__Certificates__Default__Path"];
-    var certPassword = builder.Configuration["ASPNETCORE_Kestrel__Certificates__Default__Password"];
-    
-    if (!string.IsNullOrEmpty(certPath) && System.IO.File.Exists(certPath))
+    builder.Services.AddHttpsRedirection(options =>
     {
-        Log.Information("Configuring HTTPS with certificate: {CertPath}", certPath);
-        builder.WebHost.ConfigureKestrel(serverOptions =>
-        {
-            serverOptions.ConfigureHttpsDefaults(httpsOptions =>
-            {
-                httpsOptions.ServerCertificate = new System.Security.Cryptography.X509Certificates.X509Certificate2(certPath, certPassword);
-            });
-        });
-    }
-    else
-    {
-        Log.Warning("HTTPS certificate not configured or file not found at: {CertPath}", certPath ?? "NOT SET");
-    }
+        options.HttpsPort = 443;
+    });
 
     Initializer.Configure(builder.Services, builder.Configuration.GetConnectionString("NNewsContext"), builder.Configuration);
 
     var app = builder.Build();
 
-    // Adiciona middleware do Serilog para logging de requisições HTTP
+    // Adiciona middleware do Serilog para logging de requisiï¿½ï¿½es HTTP
     app.UseSerilogRequestLogging(options =>
     {
         options.MessageTemplate = "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms";
-        options.GetLevel = (httpContext, elapsed, ex) => LogEventLevel.Debug;  // Log todas requisições como Debug
+        options.GetLevel = (httpContext, elapsed, ex) => LogEventLevel.Debug;  // Log todas requisiï¿½ï¿½es como Debug
         options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
         {
             diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
@@ -105,10 +90,13 @@ try
         app.UseSwaggerUI();
     }
 
-    //app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
 
     // Habilitar CORS - DEVE vir antes de UseAuthentication e UseAuthorization
     app.UseCors("AllowFrontend");
+
+    // Multi-Tenant: resolve TenantId from X-Tenant-Id header BEFORE authentication
+    app.UseMiddleware<TenantMiddleware>();
 
     app.UseAuthentication();
     app.UseAuthorization();
