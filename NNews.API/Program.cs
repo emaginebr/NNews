@@ -64,6 +64,9 @@ try
 
     var app = builder.Build();
 
+    // CORS deve ser o primeiro middleware para responder preflight OPTIONS corretamente
+    app.UseCors("AllowFrontend");
+
     // Adiciona middleware do Serilog para logging de requisi��es HTTP
     app.UseSerilogRequestLogging(options =>
     {
@@ -85,9 +88,6 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-
-    // Habilitar CORS - DEVE vir antes de UseAuthentication e UseAuthorization
-    app.UseCors("AllowFrontend");
 
     // Multi-Tenant: resolve TenantId from X-Tenant-Id header BEFORE authentication
     app.UseMiddleware<TenantMiddleware>();
