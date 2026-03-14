@@ -18,6 +18,7 @@ namespace NNews.Domain.Entities
         public string Title { get; private set; }
         public string Content { get; private set; }
         public ArticleStatus Status { get; private set; }
+        public ContentType ContentType { get; private set; }
         public ICategoryModel? Category { get; private set; }
 
         public IReadOnlyCollection<ITagModel> Tags => _tags.AsReadOnly();
@@ -31,7 +32,7 @@ namespace NNews.Domain.Entities
             Content = string.Empty;
         }
 
-        public ArticleModel(string title, string content, long categoryId, long? authorId = null, ArticleStatus status = ArticleStatus.Draft) : this()
+        public ArticleModel(string title, string content, long categoryId, long? authorId = null, ArticleStatus status = ArticleStatus.Draft, ContentType contentType = ContentType.Html) : this()
         {
             SetTitle(title);
             SetContent(content);
@@ -39,27 +40,29 @@ namespace NNews.Domain.Entities
             if (authorId.HasValue)
                 SetAuthorId(authorId.Value);
             Status = status;
+            ContentType = contentType;
             DateAt = DateTime.UtcNow;
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
 
-        public static ArticleModel Create(string title, string content, long categoryId, long? authorId = null, ArticleStatus status = ArticleStatus.Draft)
+        public static ArticleModel Create(string title, string content, long categoryId, long? authorId = null, ArticleStatus status = ArticleStatus.Draft, ContentType contentType = ContentType.Html)
         {
-            return new ArticleModel(title, content, categoryId, authorId, status);
+            return new ArticleModel(title, content, categoryId, authorId, status, contentType);
         }
 
         public static ArticleModel Reconstruct(
-            long articleId, 
-            string title, 
+            long articleId,
+            string title,
             string content,
-            long categoryId, 
-            long? authorId, 
-            ArticleStatus status, 
-            DateTime dateAt, 
-            DateTime createdAt, 
-            DateTime updatedAt, 
-            string? imageName = null
+            long categoryId,
+            long? authorId,
+            ArticleStatus status,
+            DateTime dateAt,
+            DateTime createdAt,
+            DateTime updatedAt,
+            string? imageName = null,
+            ContentType contentType = ContentType.Html
         )
         {
             var article = new ArticleModel
@@ -70,6 +73,7 @@ namespace NNews.Domain.Entities
                 CategoryId = categoryId,
                 AuthorId = authorId,
                 Status = status,
+                ContentType = contentType,
                 DateAt = dateAt,
                 CreatedAt = createdAt,
                 UpdatedAt = updatedAt,
@@ -106,6 +110,12 @@ namespace NNews.Domain.Entities
         public void ChangeCategory(long categoryId)
         {
             SetCategoryId(categoryId);
+            UpdateTimestamp();
+        }
+
+        public void UpdateContentType(ContentType contentType)
+        {
+            ContentType = contentType;
             UpdateTimestamp();
         }
 

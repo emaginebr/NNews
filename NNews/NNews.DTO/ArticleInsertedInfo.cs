@@ -35,6 +35,10 @@ namespace NNews.DTO
         [JsonPropertyName("status")]
         public int Status { get; set; }
 
+        [Range(1, 3, ErrorMessage = "ContentType must be 1 (PlainText), 2 (Html), 3 (MarkDown)")]
+        [JsonPropertyName("contentType")]
+        public int ContentType { get; set; } = 2;
+
         [Required(ErrorMessage = "DateAt is required")]
         [JsonPropertyName("dateAt")]
         public DateTime DateAt { get; set; }

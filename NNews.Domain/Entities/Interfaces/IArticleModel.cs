@@ -14,6 +14,7 @@ namespace NNews.Domain.Entities.Interfaces
         string Title { get; }
         string Content { get; }
         ArticleStatus Status { get; }
+        ContentType ContentType { get; }
         ICategoryModel? Category { get; }
         IReadOnlyCollection<ITagModel> Tags { get; }
         IReadOnlyCollection<IRoleModel> Roles { get; }
@@ -22,6 +23,7 @@ namespace NNews.Domain.Entities.Interfaces
         void UpdateContent(string content);
         void Update(string title, string content);
         void ChangeCategory(long categoryId);
+        void UpdateContentType(ContentType contentType);
         void UpdateImageName(string? imageName);
         void Publish();
         void Draft();

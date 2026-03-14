@@ -39,7 +39,8 @@ CREATE TABLE articles (
     image_name character varying(560),
     title character varying(255) NOT NULL,
     content text NOT NULL,
-    status integer DEFAULT 0 NOT NULL
+    status integer DEFAULT 0 NOT NULL,
+    content_type integer DEFAULT 2 NOT NULL
 );
 
 CREATE TABLE tags (

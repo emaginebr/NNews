@@ -25,6 +25,8 @@ public partial class Article
 
     public int Status { get; set; }
 
+    public int ContentType { get; set; }
+
     public virtual ICollection<ArticleRole> ArticleRoles { get; set; } = new List<ArticleRole>();
 
     public virtual Category Category { get; set; } = null!;

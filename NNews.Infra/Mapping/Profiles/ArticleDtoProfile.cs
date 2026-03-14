@@ -12,12 +12,14 @@ namespace NNews.Infra.Mapping.Profiles
         {
             CreateMap<ArticleModel, ArticleInfo>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => (int)src.Status))
+                .ForMember(dest => dest.ContentType, opt => opt.MapFrom(src => (int)src.ContentType))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags))
                 .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.Roles));
 
             CreateMap<IArticleModel, ArticleInfo>()
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => (int)src.Status))
+                .ForMember(dest => dest.ContentType, opt => opt.MapFrom(src => (int)src.ContentType))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category))
                 .ForMember(dest => dest.Tags, opt => opt.MapFrom(src => src.Tags))
                 .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => src.Roles));
@@ -39,7 +41,8 @@ namespace NNews.Infra.Mapping.Profiles
                             src.DateAt,
                             src.CreatedAt,
                             src.UpdatedAt,
-                            src.ImageName
+                            src.ImageName,
+                            (ContentType)src.ContentType
                         );
                     }
                     else
@@ -49,7 +52,8 @@ namespace NNews.Infra.Mapping.Profiles
                             src.Content,
                             src.CategoryId,
                             src.AuthorId,
-                            (ArticleStatus)src.Status
+                            (ArticleStatus)src.Status,
+                            (ContentType)src.ContentType
                         );
                         
                         if (!string.IsNullOrEmpty(src.ImageName))
@@ -88,7 +92,8 @@ namespace NNews.Infra.Mapping.Profiles
                         src.Content,
                         src.CategoryId,
                         src.AuthorId,
-                        (ArticleStatus)src.Status
+                        (ArticleStatus)src.Status,
+                        (ContentType)src.ContentType
                     );
                     
                     if (!string.IsNullOrEmpty(src.ImageName))
@@ -113,7 +118,8 @@ namespace NNews.Infra.Mapping.Profiles
                         src.DateAt,
                         DateTime.UtcNow,
                         DateTime.UtcNow,
-                        src.ImageName
+                        src.ImageName,
+                        (ContentType)src.ContentType
                     );
 
                     return article;

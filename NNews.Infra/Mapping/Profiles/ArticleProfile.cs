@@ -23,7 +23,8 @@ namespace NNews.Infra.Mapping.Profiles
                         src.DateAt,
                         src.CreatedAt,
                         src.UpdatedAt,
-                        src.ImageName
+                        src.ImageName,
+                        (ContentType)src.ContentType
                     );
 
                     if (src.Category != null)
@@ -61,6 +62,7 @@ namespace NNews.Infra.Mapping.Profiles
                 .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.CategoryId))
                 .ForMember(dest => dest.AuthorId, opt => opt.MapFrom(src => src.AuthorId))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => (int)src.Status))
+                .ForMember(dest => dest.ContentType, opt => opt.MapFrom(src => (int)src.ContentType))
                 .ForMember(dest => dest.DateAt, opt => opt.MapFrom(src => src.DateAt))
                 .ForMember(dest => dest.ImageName, opt => opt.MapFrom(src => src.ImageName))
                 .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(src => src.CreatedAt))

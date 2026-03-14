@@ -49,6 +49,9 @@ public partial class NNewsContext : DbContext
             entity.Property(e => e.Status)
                 .HasDefaultValue(0)
                 .HasColumnName("status");
+            entity.Property(e => e.ContentType)
+                .HasDefaultValue(2)
+                .HasColumnName("content_type");
             entity.Property(e => e.Title)
                 .HasMaxLength(255)
                 .HasColumnName("title");
