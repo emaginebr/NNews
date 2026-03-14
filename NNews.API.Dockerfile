@@ -1,6 +1,12 @@
-# Stage 1: Build
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Stage 1: Build and Publish
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS publish
 WORKDIR /src
+
+# Reduce SDK memory usage
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+ENV DOTNET_NOLOGO=1
+ENV DOTNET_GCConserveMemory=9
+ENV DOTNET_GCHeapHardLimit=0x1E000000
 
 # Copy solution and project files
 COPY ["NNews.API/NNews.API.csproj", "NNews.API/"]
@@ -15,15 +21,11 @@ RUN dotnet restore "NNews.API/NNews.API.csproj"
 # Copy all source files
 COPY . .
 
-# Build the application
+# Publish (already includes build) with minimal memory usage
 WORKDIR "/src/NNews.API"
-RUN dotnet build "NNews.API.csproj" -c Release -o /app/build
+RUN dotnet publish "NNews.API.csproj" -c Release -o /app/publish /p:UseAppHost=false /m:1 /p:TieredCompilation=false
 
-# Stage 2: Publish
-FROM build AS publish
-RUN dotnet publish "NNews.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-# Stage 3: Runtime
+# Stage 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 
