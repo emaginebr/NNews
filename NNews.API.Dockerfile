@@ -37,17 +37,13 @@ RUN mkdir -p /app/logs /app/certs && \
     chmod 755 /app/logs && \
     chmod 755 /app/certs
 
-# Expose ports
+# Expose port
 EXPOSE 80
-EXPOSE 443
 
 # Copy published application
 COPY --from=publish /app/publish .
 
-# Copy SSL certificate (used in Production via Kestrel env vars)
-COPY ["NNews.API/emagine.pfx", "./emagine.pfx"]
-
-# Set environment variables (defaults to HTTP-only for dev; Production overrides via docker-compose-prod.yml)
+# Set environment variables
 ENV ASPNETCORE_URLS=http://+:80
 ENV ASPNETCORE_ENVIRONMENT=Docker
 

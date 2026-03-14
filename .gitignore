@@ -114,12 +114,11 @@ StyleCopReport.xml
 *.svclog
 *.scc
 
-# SSL Certificates (Development)
+# Certificates
 certs/
 *.crt
 *.key
 *.pfx
-!NNews.API/emagine.pfx
 *.p12
 *.pem
 

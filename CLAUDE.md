@@ -14,7 +14,7 @@ NNews is a full-stack CMS (Content Management System) for news and blogs with AI
 dotnet restore NNews.sln
 dotnet build NNews.sln
 
-# Run the API (HTTP: 5007, HTTPS: 5008)
+# Run the API (HTTP: 5007)
 dotnet run --project NNews.API
 ```
 

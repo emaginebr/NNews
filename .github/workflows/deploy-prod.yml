@@ -51,7 +51,6 @@ jobs:
         script: |
           set -e
           cat > /opt/nnews/.env.prod <<'ENVEOF'
-          CERTIFICATE_PASSWORD=${{ secrets.CERTIFICATE_PASSWORD }}
           EMAGINE_CONNECTION_STRING=${{ secrets.EMAGINE_CONNECTION_STRING }}
           EMAGINE_JWT_SECRET=${{ secrets.EMAGINE_JWT_SECRET }}
           DEVBLOG_CONNECTION_STRING=${{ secrets.DEVBLOG_CONNECTION_STRING }}

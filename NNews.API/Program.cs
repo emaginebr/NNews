@@ -59,10 +59,6 @@ try
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
-    builder.Services.AddHttpsRedirection(options =>
-    {
-        options.HttpsPort = 443;
-    });
 
     Initializer.Configure(builder.Services, builder.Configuration.GetConnectionString("NNewsContext"), builder.Configuration);
 
@@ -89,8 +85,6 @@ try
         app.UseSwagger();
         app.UseSwaggerUI();
     }
-
-    app.UseHttpsRedirection();
 
     // Habilitar CORS - DEVE vir antes de UseAuthentication e UseAuthorization
     app.UseCors("AllowFrontend");

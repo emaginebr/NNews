@@ -2,8 +2,6 @@
 * text=auto
 
 # Binary files - never modify line endings
-*.pfx binary
-*.p12 binary
 *.png binary
 *.jpg binary
 *.jpeg binary
