@@ -1,5 +1,6 @@
 using NNews.API.Middlewares;
 using NNews.Application;
+using Prometheus;
 using Serilog;
 using Serilog.Events;
 using System.Text.Json.Serialization;
@@ -67,6 +68,9 @@ try
     // CORS deve ser o primeiro middleware para responder preflight OPTIONS corretamente
     app.UseCors("AllowFrontend");
 
+    // Prometheus: coleta métricas de requests HTTP (duração, contagem, status code)
+    app.UseHttpMetrics();
+
     // Adiciona middleware do Serilog para logging de requisi��es HTTP
     app.UseSerilogRequestLogging(options =>
     {
@@ -96,6 +100,7 @@ try
     app.UseAuthorization();
 
     app.MapControllers();
+    app.MapMetrics();
 
     Log.Information("NNews API started successfully");
     app.Run();
