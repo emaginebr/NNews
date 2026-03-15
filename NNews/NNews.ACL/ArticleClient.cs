@@ -24,7 +24,7 @@ namespace NNews.ACL
             _httpClient.BaseAddress = new Uri(settings.Value.ApiUrl);
         }
 
-        public async Task<PagedResult<ArticleInfo>> GetAllAsync(long? categoryId = null, int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
+        public async Task<PagedResult<ArticleInfo>> GetAllAsync(long? categoryId = null, int? status = null, int page = 1, int pageSize = 10, CancellationToken cancellationToken = default)
         {
             var queryParams = new List<string>
             {
@@ -35,6 +35,11 @@ namespace NNews.ACL
             if (categoryId.HasValue)
             {
                 queryParams.Add($"categoryId={categoryId.Value}");
+            }
+
+            if (status.HasValue)
+            {
+                queryParams.Add($"status={status.Value}");
             }
 
             var query = string.Join("&", queryParams);
@@ -143,6 +148,12 @@ namespace NNews.ACL
 
             var result = await response.Content.ReadFromJsonAsync<ArticleInfo>(cancellationToken: cancellationToken);
             return result ?? throw new InvalidOperationException("Failed to deserialize updated article response");
+        }
+
+        public async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
+        {
+            var response = await _httpClient.DeleteAsync($"{BaseRoute}/{id}", cancellationToken);
+            response.EnsureSuccessStatusCode();
         }
     }
 }

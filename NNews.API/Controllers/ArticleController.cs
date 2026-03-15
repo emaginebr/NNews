@@ -32,6 +32,7 @@ namespace NNews.API.Controllers
         /// Lists all articles
         /// </summary>
         /// <param name="categoryId">Optional category ID to filter articles</param>
+        /// <param name="status">Optional status filter (0=Draft, 1=Published, 2=Archived, 3=Scheduled)</param>
         /// <param name="page">Page number (default: 1)</param>
         /// <param name="pageSize">Page size (default: 10, max: 100)</param>
         /// <returns>Paginated list of articles</returns>
@@ -39,7 +40,7 @@ namespace NNews.API.Controllers
         [Authorize]
         [ProducesResponseType(typeof(PagedResult<ArticleInfo>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetAll([FromQuery] long? categoryId, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public IActionResult GetAll([FromQuery] long? categoryId, [FromQuery] int? status, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             try
             {
@@ -49,7 +50,7 @@ namespace NNews.API.Controllers
                     return Unauthorized("Not Authorized");
                 }
 
-                var articles = _articleService.ListAll(categoryId, page, pageSize);
+                var articles = _articleService.ListAll(categoryId, status, page, pageSize);
                 return Ok(articles);
             }
             catch (Exception ex)
@@ -93,14 +94,13 @@ namespace NNews.API.Controllers
         /// <summary>
         /// Lists published articles filtered by roles
         /// </summary>
-        /// <param name="roles">List of role slugs (comma-separated, optional)</param>
         /// <param name="page">Page number (default: 1)</param>
         /// <param name="pageSize">Page size (default: 10, max: 100)</param>
         /// <returns>Paginated list of published articles filtered by roles</returns>
         [HttpGet("ListByRoles")]
         [ProducesResponseType(typeof(PagedResult<ArticleInfo>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ListByRoles([FromQuery] string? roles, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public IActionResult ListByRoles([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             try
             {
@@ -120,7 +120,6 @@ namespace NNews.API.Controllers
         /// Lists published articles filtered by tag slug and optionally by roles
         /// </summary>
         /// <param name="tagSlug">Tag slug (required)</param>
-        /// <param name="roles">List of role slugs (comma-separated, optional)</param>
         /// <param name="page">Page number (default: 1)</param>
         /// <param name="pageSize">Page size (default: 10, max: 100)</param>
         /// <returns>Paginated list of published articles filtered by tag and roles</returns>
@@ -128,7 +127,7 @@ namespace NNews.API.Controllers
         [ProducesResponseType(typeof(PagedResult<ArticleInfo>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult ListByTag([FromQuery] string tagSlug, [FromQuery] string? roles, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public IActionResult ListByTag([FromQuery] string tagSlug, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             try
             {
@@ -156,7 +155,6 @@ namespace NNews.API.Controllers
         /// Searches published articles by keyword in title and content, optionally filtered by roles
         /// </summary>
         /// <param name="keyword">Search keyword (required)</param>
-        /// <param name="roles">List of role slugs (comma-separated, optional)</param>
         /// <param name="page">Page number (default: 1)</param>
         /// <param name="pageSize">Page size (default: 10, max: 100)</param>
         /// <returns>Paginated list of published articles matching the search criteria</returns>
@@ -164,7 +162,7 @@ namespace NNews.API.Controllers
         [ProducesResponseType(typeof(PagedResult<ArticleInfo>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Search([FromQuery] string keyword, [FromQuery] string? roles, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
+        public IActionResult Search([FromQuery] string keyword, [FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             try
             {
@@ -400,6 +398,41 @@ namespace NNews.API.Controllers
             {
                 _logger.LogError(ex, "Error updating article with AI: {ArticleId}", request.ArticleId);
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error updating article with AI" });
+            }
+        }
+
+        /// <summary>
+        /// Deletes an article by ID
+        /// </summary>
+        /// <param name="id">Article ID</param>
+        /// <returns>No content</returns>
+        [HttpDelete("{id}")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var userSession = _userClient.GetUserInSession(HttpContext);
+                if (userSession == null)
+                {
+                    return Unauthorized("Not Authorized");
+                }
+
+                _articleService.Delete(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                _logger.LogWarning(ex, "Article not found for deletion: {ArticleId}", id);
+                return NotFound(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error deleting article: {ArticleId}", id);
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Error deleting article" });
             }
         }
     }

@@ -27,7 +27,7 @@ namespace NNews.Domain.Services
             _stringClient = stringClient ?? throw new ArgumentNullException(nameof(stringClient));
         }
 
-        public PagedResult<ArticleInfo> ListAll(long? categoryId, int page, int pageSize)
+        public PagedResult<ArticleInfo> ListAll(long? categoryId, int? status, int page, int pageSize)
         {
             if (page < 1)
                 page = 1;
@@ -36,7 +36,7 @@ namespace NNews.Domain.Services
             if (pageSize > 100)
                 pageSize = 100;
 
-            var (items, totalCount) = _articleRepository.ListAll(categoryId, page, pageSize);
+            var (items, totalCount) = _articleRepository.ListAll(categoryId, status, page, pageSize);
             var articles = _mapper.Map<IList<ArticleInfo>>(items);
 
             return new PagedResult<ArticleInfo>
@@ -238,6 +238,11 @@ namespace NNews.Domain.Services
                     }
                 }
             }
+        }
+
+        public void Delete(int articleId)
+        {
+            _articleRepository.Delete(articleId);
         }
 
         private async Task ProcessTagsAsync(ArticleModel articleModel, string? tagList)

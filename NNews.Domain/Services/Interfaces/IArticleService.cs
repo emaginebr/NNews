@@ -4,7 +4,7 @@ namespace NNews.Domain.Services.Interfaces
 {
     public interface IArticleService
     {
-        PagedResult<ArticleInfo> ListAll(long? categoryId, int page, int pageSize);
+        PagedResult<ArticleInfo> ListAll(long? categoryId, int? status, int page, int pageSize);
         PagedResult<ArticleInfo> ListByRoles(IList<string>? roles, int page, int pageSize);
         PagedResult<ArticleInfo> ListByTag(IList<string>? roles, string tagSlug, int page, int pageSize);
         PagedResult<ArticleInfo> ListByCategory(IList<string>? roles, long categoryId, int page, int pageSize);
@@ -14,5 +14,6 @@ namespace NNews.Domain.Services.Interfaces
         ArticleInfo Update(ArticleUpdatedInfo article);
         ArticleInfo Schedule(int articleId, DateTime publishDate);
         void PublishScheduledArticles();
+        void Delete(int articleId);
     }
 }

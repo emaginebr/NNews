@@ -19,7 +19,7 @@ namespace NNews.Infra.Repository
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public (IEnumerable<IArticleModel> Items, int TotalCount) ListAll(long? categoryId, int page, int pageSize)
+        public (IEnumerable<IArticleModel> Items, int TotalCount) ListAll(long? categoryId, int? status, int page, int pageSize)
         {
             IQueryable<Article> query = _context.Articles
                 .AsNoTracking()
@@ -30,6 +30,11 @@ namespace NNews.Infra.Repository
             if (categoryId.HasValue)
             {
                 query = query.Where(a => a.CategoryId == categoryId.Value);
+            }
+
+            if (status.HasValue)
+            {
+                query = query.Where(a => a.Status == status.Value);
             }
 
             var totalCount = query.Count();

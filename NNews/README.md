@@ -29,7 +29,7 @@ Install-Package NNews
 - **JSON Serialization**: Optimized for System.Text.Json with proper property naming
 
 ### Clients (NNews.ACL)
-- **Article Management**: Complete CRUD operations with filtering and search
+- **Article Management**: Complete CRUD operations with filtering, search, and deletion
 - **AI Content Generation**: Create and update articles using ChatGPT and DALL-E 3
 - **Category Management**: Hierarchical category operations with role-based filtering
 - **Tag Management**: Tag CRUD with merging capabilities
@@ -145,6 +145,9 @@ using NNews.DTO;
 // List articles with pagination
 var articles = await articleClient.GetAllAsync(categoryId: 1, page: 1, pageSize: 10);
 
+// Filter by status (0=Draft, 1=Published, 2=Archived, 3=Scheduled)
+var published = await articleClient.GetAllAsync(status: 1, page: 1, pageSize: 10);
+
 // Search articles
 var results = await articleClient.SearchAsync("AI technology", page: 1, pageSize: 10);
 
@@ -159,6 +162,9 @@ var newArticle = new ArticleInsertedInfo
     DateAt = DateTime.UtcNow
 };
 var created = await articleClient.CreateAsync(newArticle);
+
+// Delete article
+await articleClient.DeleteAsync(articleId: 42);
 ```
 
 ### AI Content Generation
@@ -207,7 +213,7 @@ await tagClient.MergeTagsAsync(sourceTagId: 10, targetTagId: 20);
 ```csharp
 public interface IArticleClient
 {
-    Task<PagedResult<ArticleInfo>> GetAllAsync(long? categoryId, int page, int pageSize, CancellationToken ct);
+    Task<PagedResult<ArticleInfo>> GetAllAsync(long? categoryId, int? status, int page, int pageSize, CancellationToken ct);
     Task<PagedResult<ArticleInfo>> ListByCategoryAsync(long categoryId, int page, int pageSize, CancellationToken ct);
     Task<PagedResult<ArticleInfo>> ListByRolesAsync(int page, int pageSize, CancellationToken ct);
     Task<PagedResult<ArticleInfo>> ListByTagAsync(string tagSlug, int page, int pageSize, CancellationToken ct);
@@ -215,6 +221,7 @@ public interface IArticleClient
     Task<ArticleInfo> GetByIdAsync(int id, CancellationToken ct);
     Task<ArticleInfo> CreateAsync(ArticleInsertedInfo article, CancellationToken ct);
     Task<ArticleInfo> UpdateAsync(ArticleUpdatedInfo article, CancellationToken ct);
+    Task DeleteAsync(int id, CancellationToken ct);
 }
 
 public interface IArticleAIClient

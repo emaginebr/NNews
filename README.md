@@ -350,7 +350,7 @@ The API will be available at `http://localhost:5007` and `https://localhost:5008
 
 | Method | Endpoint | Description | Auth |
 |--------|----------|-------------|------|
-| GET | `/article` | List all articles (paginated) | Yes |
+| GET | `/article` | List all articles (paginated, filter by categoryId/status) | Yes |
 | GET | `/article/ListByCategory` | Filter published articles by category & roles | No |
 | GET | `/article/ListByRoles` | Filter published articles by user roles | No |
 | GET | `/article/ListByTag` | Filter published articles by tag slug | No |
@@ -360,6 +360,7 @@ The API will be available at `http://localhost:5007` and `https://localhost:5008
 | POST | `/article/insertWithAI` | Create article with AI (ChatGPT) | Yes |
 | PUT | `/article` | Update article | Yes |
 | PUT | `/article/updateWithAI` | Update article with AI | Yes |
+| DELETE | `/article/{id}` | Delete article | Yes |
 | GET | `/category` | List all categories | Yes |
 | GET | `/category/listByParent` | Filter categories by parent & roles | No |
 | GET | `/category/{id}` | Get category by ID | No |
