@@ -42,7 +42,15 @@ namespace NNews.API.Controllers
                     return Unauthorized("Not Authorized");
                 }
 
-                var fileName = await _imageService.UploadFileAsync("NNews", file);
+                var extension = Path.GetExtension(file.FileName) ?? ".jpg";
+                var uniqueName = $"{Guid.NewGuid()}{extension}";
+                var renamedFile = new FormFile(file.OpenReadStream(), 0, file.Length, file.Name, uniqueName)
+                {
+                    Headers = file.Headers,
+                    ContentType = file.ContentType
+                };
+
+                var fileName = await _imageService.UploadFileAsync("NNews", renamedFile);
                 var imageUrl = await _imageService.GetFileUrlAsync("NNews", fileName);
                 return Ok(imageUrl);
             }

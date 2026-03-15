@@ -28,6 +28,12 @@ try
 
     var builder = WebApplication.CreateBuilder(args);
 
+    // Aumenta o limite de tamanho de request do Kestrel para suportar upload de imagens (100 MB)
+    builder.WebHost.ConfigureKestrel(options =>
+    {
+        options.Limits.MaxRequestBodySize = 100_000_000;
+    });
+
     // Adiciona Serilog ao ASP.NET Core
     builder.Host.UseSerilog();
 
